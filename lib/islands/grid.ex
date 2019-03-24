@@ -8,14 +8,12 @@ defmodule Islands.Grid do
 
   @moduledoc """
   Creates a `grid` struct for the _Game of Islands_.
-  \n##### #{@book_ref}
-  """
 
-  @moduledoc """
   Convenience module for client applications.
 
   Converts a board or guesses struct to a grid (map of maps).
   Also converts a grid to a list of maps.
+  \n##### #{@book_ref}
   """
 
   import Enum, only: [reduce: 3]
