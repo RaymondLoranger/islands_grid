@@ -4,7 +4,7 @@ defmodule Islands.Grid.MixProject do
   def project do
     [
       app: :islands_grid,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       name: "Islands Grid",
@@ -49,10 +49,10 @@ defmodule Islands.Grid.MixProject do
       {:poison, "~> 3.0"},
       {:jason, "~> 1.0"},
       {:persist_config, "~> 0.1"},
-      {:islands_coord, path: "../islands_coord"},
-      {:islands_island, path: "../islands_island"},
-      {:islands_guesses, path: "../islands_guesses"},
-      {:islands_board, path: "../islands_board"},
+      {:islands_coord, "~> 0.1"},
+      {:islands_island, "~> 0.1"},
+      {:islands_guesses, "~> 0.1"},
+      {:islands_board, "~> 0.1"},
       {:io_ansi_plus, "~> 0.1"},
       {:earmark, "~> 1.0", only: :dev},
       {:ex_doc, "~> 0.14", only: :dev, runtime: false},

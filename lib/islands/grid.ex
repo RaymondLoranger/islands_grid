@@ -1,6 +1,6 @@
-# ┌────────────────────────────────────────────────────────────────────┐
-# │ Based on the book "Functional Web Development" by Lance Halvorsen. │
-# └────────────────────────────────────────────────────────────────────┘
+# ┌───────────────────────────────────────────────────────────────────────┐
+# │ Inspired by the book "Functional Web Development" by Lance Halvorsen. │
+# └───────────────────────────────────────────────────────────────────────┘
 defmodule Islands.Grid do
   use PersistConfig
 
