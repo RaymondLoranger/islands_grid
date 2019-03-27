@@ -1,6 +1,6 @@
 # Islands Grid
 
-Models a `grid` for the _Game of Islands_.
+Creates a `grid` struct for the _Game of Islands_.
 
 ##### Inspired by the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
 
