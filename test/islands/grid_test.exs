@@ -105,8 +105,8 @@ defmodule Islands.GridTest do
   end
 
   describe "Grid.to_maps/2" do
-    test "converts a grid to a list of maps", %{board: board} do
-      [row_1, row_2 | _] = board |> Grid.new() |> Grid.to_maps(& &1)
+    test "converts a board to a list of maps", %{board: board} do
+      [row_1, row_2 | _] = Grid.to_maps(board, & &1)
 
       assert row_1 == %{
                "row" => 1,
@@ -129,6 +129,24 @@ defmodule Islands.GridTest do
                3 => nil,
                4 => nil,
                5 => nil,
+               6 => nil,
+               7 => nil,
+               8 => nil,
+               9 => nil,
+               10 => nil
+             }
+    end
+
+    test "converts a guesses to a list of maps", %{guesses: guesses} do
+      [row_1 | _] = Grid.to_maps(guesses, & &1)
+
+      assert row_1 == %{
+               "row" => 1,
+               1 => nil,
+               2 => nil,
+               3 => nil,
+               4 => :hit,
+               5 => :miss,
                6 => nil,
                7 => nil,
                8 => nil,
