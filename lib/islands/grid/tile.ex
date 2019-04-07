@@ -2,9 +2,8 @@ defmodule Islands.Grid.Tile do
   @moduledoc "Convenience module for client applications."
 
   alias IO.ANSI.Plus, as: ANSI
-  alias Islands.Island
 
-  @spec new(Island.type() | nil) :: ANSI.ansidata()
+  @spec new(atom) :: ANSI.ansidata()
   def new(:atoll), do: format(:sandy_brown, "<a>")
   def new(:dot), do: format(:teak, "<d>")
   def new(:l_shape), do: format(:tenne, "<l>")
