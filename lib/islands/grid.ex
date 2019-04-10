@@ -22,18 +22,18 @@ defmodule Islands.Grid do
   alias IO.ANSI.Plus, as: ANSI
   alias Islands.{Board, Coord, Guesses, Island}
 
+  @coord_range 1..10
+
   @type t :: %{Coord.row() => %{Coord.col() => atom}}
   @type tile_fun :: (atom -> ANSI.ansidata())
-
-  @board_range Application.get_env(@app, :board_range)
 
   @doc """
   Returns an "empty" grid.
   """
-  @spec new() :: t
-  def new() do
-    for row <- @board_range, into: %{} do
-      {row, for(col <- @board_range, into: %{}, do: {col, nil})}
+  @spec new :: t
+  def new do
+    for row <- @coord_range, into: %{} do
+      {row, for(col <- @coord_range, into: %{}, do: {col, nil})}
     end
   end
 
