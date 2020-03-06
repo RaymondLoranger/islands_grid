@@ -4,7 +4,7 @@ defmodule Islands.Grid.MixProject do
   def project do
     [
       app: :islands_grid,
-      version: "0.1.7",
+      version: "0.1.8",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       name: "Islands Grid",
@@ -46,7 +46,7 @@ defmodule Islands.Grid.MixProject do
     [
       {:mix_tasks,
        github: "RaymondLoranger/mix_tasks", only: :dev, runtime: false},
-      {:persist_config, "~> 0.1"},
+      {:persist_config, "~> 0.2", runtime: false},
       {:islands_board, "~> 0.1"},
       {:islands_coord, "~> 0.1"},
       {:islands_guesses, "~> 0.1"},
