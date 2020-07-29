@@ -4,8 +4,8 @@ defmodule Islands.Grid.MixProject do
   def project do
     [
       app: :islands_grid,
-      version: "0.1.9",
-      elixir: "~> 1.7",
+      version: "0.1.10",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       name: "Islands Grid",
       source_url: source_url(),
@@ -27,7 +27,7 @@ defmodule Islands.Grid.MixProject do
 
   defp package do
     [
-      files: ["lib", "mix.exs", "README*", "config/persist*.exs"],
+      files: ["lib", "mix.exs", "README*"],
       maintainers: ["Raymond Loranger"],
       licenses: ["MIT"],
       links: %{"GitHub" => source_url()}
@@ -46,15 +46,14 @@ defmodule Islands.Grid.MixProject do
     [
       {:mix_tasks,
        github: "RaymondLoranger/mix_tasks", only: :dev, runtime: false},
-      {:persist_config, "~> 0.2", runtime: false},
-      {:islands_board, "~> 0.1"},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0", only: :dev, runtime: false},
+      {:islands_config, "~> 0.1", runtime: false},
       {:islands_coord, "~> 0.1"},
-      {:islands_guesses, "~> 0.1"},
       {:islands_island, "~> 0.1"},
-      {:io_ansi_plus, "~> 0.1"},
-      {:earmark, "~> 1.0", only: :dev},
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
-      {:dialyxir, "~> 0.5", only: :dev, runtime: false}
+      {:islands_board, "~> 0.1"},
+      {:islands_guesses, "~> 0.1"},
+      {:io_ansi_plus, "~> 0.1"}
     ]
   end
 end

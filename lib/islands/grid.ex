@@ -2,10 +2,6 @@
 # │ Inspired by the book "Functional Web Development" by Lance Halvorsen. │
 # └───────────────────────────────────────────────────────────────────────┘
 defmodule Islands.Grid do
-  use PersistConfig
-
-  @book_ref Application.get_env(@app, :book_ref)
-
   @moduledoc """
   Creates a `grid` (map of maps) for the _Game of Islands_.
 
@@ -13,7 +9,7 @@ defmodule Islands.Grid do
 
   Converts a `board` or `guesses` struct to a `grid` (map of maps).
   Also converts a `board` or `guesses` struct to a list of maps.
-  \n##### #{@book_ref}
+  \n##### #{Islands.Config.get(:book_ref)}
   """
 
   import Enum, only: [reduce: 3]
