@@ -25,7 +25,7 @@ defmodule Islands.GridTest do
       |> Guesses.add(:hit, hit)
       |> Guesses.add(:miss, miss)
 
-    {:ok, board: board, guesses: guesses}
+    %{board: board, guesses: guesses}
   end
 
   describe "Grid.new/0" do
