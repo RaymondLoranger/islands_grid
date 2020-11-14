@@ -9,7 +9,8 @@ defmodule Islands.Grid do
 
   Converts a `board` or `guesses` struct to a `grid` (map of maps).
   Also converts a `board` or `guesses` struct to a list of maps.
-  \n##### #{Islands.Config.get(:book_ref)}
+
+  ##### Inspired by the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
   """
 
   import Enum, only: [reduce: 3]
