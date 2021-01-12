@@ -46,7 +46,7 @@ defmodule Islands.GridTest do
              }
 
       assert row_2 == row_10
-      assert row_10 |> Map.values() |> Enum.all?(&is_nil/1)
+      assert Map.values(row_10) |> Enum.all?(&is_nil/1)
     end
   end
 
@@ -80,7 +80,7 @@ defmodule Islands.GridTest do
                10 => nil
              }
 
-      assert row_10 |> Map.values() |> Enum.all?(&is_nil/1)
+      assert Map.values(row_10) |> Enum.all?(&is_nil/1)
     end
 
     test "returns a guesses grid", %{guesses: guesses} do
@@ -100,12 +100,12 @@ defmodule Islands.GridTest do
              }
 
       assert row_2 == row_10
-      assert row_10 |> Map.values() |> Enum.all?(&is_nil/1)
+      assert Map.values(row_10) |> Enum.all?(&is_nil/1)
     end
   end
 
   describe "Grid.to_maps/2" do
-    test "converts a board to a list of maps", %{board: board} do
+    test "converts a board into a list of maps", %{board: board} do
       [row_1, row_2 | _] = Grid.to_maps(board, & &1)
 
       assert row_1 == %{
@@ -137,7 +137,7 @@ defmodule Islands.GridTest do
              }
     end
 
-    test "converts a guesses to a list of maps", %{guesses: guesses} do
+    test "converts guesses into a list of maps", %{guesses: guesses} do
       [row_1 | _] = Grid.to_maps(guesses, & &1)
 
       assert row_1 == %{

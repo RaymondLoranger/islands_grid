@@ -7,8 +7,8 @@ defmodule Islands.Grid do
 
   Convenience module for client applications.
 
-  Converts a `board` or `guesses` struct to a `grid` (map of maps).
-  Also converts a `board` or `guesses` struct to a list of maps.
+  Converts a `board` or `guesses` struct into a `grid` (map of maps).
+  Also converts a `board` or `guesses` struct into a list of maps.
 
   ##### Inspired by the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
   """
@@ -35,7 +35,7 @@ defmodule Islands.Grid do
   end
 
   @doc """
-  Converts a `board` or `guesses` struct to a `grid` (map of maps).
+  Converts a `board` or `guesses` struct into a `grid` (map of maps).
   """
   @spec new(Board.t() | Guesses.t()) :: t
   def new(board_or_guesses)
@@ -55,16 +55,16 @@ defmodule Islands.Grid do
     do: new() |> update(hits, :hit) |> update(misses, :miss)
 
   @doc """
-  Converts a `board` or `guesses` struct to a list of maps.
+  Converts a `board` or `guesses` struct into a list of maps.
   """
   @spec to_maps(Board.t() | Guesses.t(), tile_fun) :: [map]
   def to_maps(board_or_guesses, fun \\ &Tile.new/1)
 
   def to_maps(%Board{} = board, fun) when is_function(fun, 1),
-    do: board |> new() |> do_to_maps(fun)
+    do: new(board) |> do_to_maps(fun)
 
   def to_maps(%Guesses{} = guesses, fun) when is_function(fun, 1),
-    do: guesses |> new() |> do_to_maps(fun)
+    do: new(guesses) |> do_to_maps(fun)
 
   ## Private functions
 
