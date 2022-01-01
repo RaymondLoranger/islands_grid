@@ -3,12 +3,7 @@
 # └───────────────────────────────────────────────────────────────────────┘
 defmodule Islands.Grid do
   @moduledoc """
-  Creates a `grid` (map of maps) for the _Game of Islands_.
-
-  Convenience module for client applications.
-
-  Converts a `board` or `guesses` struct into a `grid` (map of maps).
-  Also converts a `board` or `guesses` struct into a list of maps.
+  A grid (map of maps) and functions for the _Game of Islands_.
 
   ##### Inspired by the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
   """
@@ -19,23 +14,41 @@ defmodule Islands.Grid do
   alias IO.ANSI.Plus, as: ANSI
   alias Islands.{Board, Coord, Guesses, Island}
 
-  @coord_range 1..10
+  @col_range 1..10
+  @row_range 1..10
 
+  @typedoc "A grid (map of maps) allowing the `grid[row][col]` syntax"
   @type t :: %{Coord.row() => %{Coord.col() => atom}}
+  @typedoc "Creates a tile from a cell value"
   @type tile_fun :: (atom -> ANSI.ansidata())
 
   @doc """
-  Returns an "empty" grid.
+  Creates an "empty" grid.
+
+  ## Examples
+
+      iex> alias Islands.Grid
+      iex> grid = Grid.new()
+      iex> {grid[1][1], grid[10][10]}
+      {nil, nil}
+
+      iex> alias Islands.Grid
+      iex> grid = Grid.new()
+      iex> for row <- 1..10 do
+      iex>   for col <- 1..10, uniq: true do
+      iex>     grid[row][col]
+      iex>   end
+      iex> end
+      [[nil], [nil], [nil], [nil], [nil], [nil], [nil], [nil], [nil], [nil]]
   """
   @spec new :: t
   def new do
-    for row <- @coord_range, into: %{} do
-      {row, for(col <- @coord_range, into: %{}, do: {col, nil})}
-    end
+    row_map = for col <- @col_range, into: %{}, do: {col, nil}
+    for row <- @row_range, into: %{}, do: {row, row_map}
   end
 
   @doc """
-  Converts a `board` or `guesses` struct into a `grid` (map of maps).
+  Converts a board or guesses struct into a grid.
   """
   @spec new(Board.t() | Guesses.t()) :: t
   def new(board_or_guesses)
@@ -55,16 +68,16 @@ defmodule Islands.Grid do
     do: new() |> update(hits, :hit) |> update(misses, :miss)
 
   @doc """
-  Converts a `board` or `guesses` struct into a list of maps.
+  Converts a board or guesses struct into a list of maps.
   """
   @spec to_maps(Board.t() | Guesses.t(), tile_fun) :: [map]
-  def to_maps(board_or_guesses, fun \\ &Tile.new/1)
+  def to_maps(board_or_guesses, tile_fun \\ &Tile.new/1)
 
-  def to_maps(%Board{} = board, fun) when is_function(fun, 1),
-    do: new(board) |> do_to_maps(fun)
+  def to_maps(%Board{} = board, tile_fun) when is_function(tile_fun, 1),
+    do: new(board) |> do_to_maps(tile_fun)
 
-  def to_maps(%Guesses{} = guesses, fun) when is_function(fun, 1),
-    do: new(guesses) |> do_to_maps(fun)
+  def to_maps(%Guesses{} = guesses, tile_fun) when is_function(tile_fun, 1),
+    do: new(guesses) |> do_to_maps(tile_fun)
 
   ## Private functions
 
@@ -78,13 +91,10 @@ defmodule Islands.Grid do
   end
 
   @spec do_to_maps(t, tile_fun) :: [map]
-  defp do_to_maps(%{} = grid, fun) do
-    for {row_num, row_map} <- grid do
-      [
-        {"row", row_num}
-        | for({col_num, cell_val} <- row_map, do: {col_num, fun.(cell_val)})
-      ]
-      |> Map.new()
+  defp do_to_maps(grid, tile_fun) do
+    for {row, row_map} <- grid do
+      row_list = for {col, cell_val} <- row_map, do: {col, tile_fun.(cell_val)}
+      [{"row", row} | row_list] |> Map.new()
     end
   end
 end

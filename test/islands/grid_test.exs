@@ -6,12 +6,12 @@ defmodule Islands.GridTest do
   doctest Grid
 
   setup_all do
-    {:ok, atoll_coord} = Coord.new(1, 1)
+    {:ok, atoll_orig} = Coord.new(1, 1)
     {:ok, atoll_hit} = Coord.new(1, 2)
     {:ok, board_miss} = Coord.new(1, 3)
     {:ok, hit} = Coord.new(1, 4)
     {:ok, miss} = Coord.new(1, 5)
-    {:ok, atoll} = Island.new(:atoll, atoll_coord)
+    {:ok, atoll} = Island.new(:atoll, atoll_orig)
 
     {:hit, :none, :no_win, board} =
       Board.new()
@@ -105,7 +105,7 @@ defmodule Islands.GridTest do
   end
 
   describe "Grid.to_maps/2" do
-    test "converts a board into a list of maps", %{board: board} do
+    test "converts a board struct into a list of maps", %{board: board} do
       [row_1, row_2 | _] = Grid.to_maps(board, & &1)
 
       assert row_1 == %{
@@ -137,7 +137,7 @@ defmodule Islands.GridTest do
              }
     end
 
-    test "converts guesses into a list of maps", %{guesses: guesses} do
+    test "converts a guesses struct into a list of maps", %{guesses: guesses} do
       [row_1 | _] = Grid.to_maps(guesses, & &1)
 
       assert row_1 == %{

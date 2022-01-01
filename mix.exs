@@ -4,7 +4,7 @@ defmodule Islands.Grid.MixProject do
   def project do
     [
       app: :islands_grid,
-      version: "0.1.17",
+      version: "0.1.18",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Islands Grid",
@@ -21,7 +21,7 @@ defmodule Islands.Grid.MixProject do
 
   defp description do
     """
-    Creates a grid (map of maps) for the Game of Islands.
+    A grid (map of maps) and functions for the Game of Islands.
     """
   end
 
