@@ -6,7 +6,7 @@ defmodule Islands.Grid.Tile do
   alias IO.ANSI.Plus, as: ANSI
 
   @doc """
-  Creates a tile (ANSI codes) from `cell_value`.
+  Creates a tile (with embedded ANSI escapes) from `cell_value`.
 
   ## Examples
 
