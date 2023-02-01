@@ -18,7 +18,7 @@ defmodule Islands.Grid.Tile do
       iex> Tile.new(:atoll_hit) # => An islamic green tile
       [[[[[] | "\e[38;5;34m"] | "\e[48;5;34m"], ">a<"] | "\e[0m"]
   """
-  @spec new(atom) :: ANSI.ansidata()
+  @spec new(atom) :: IO.chardata()
   def new(cell_value)
   def new(:atoll), do: format(:sandy_brown, "<a>")
   def new(:dot), do: format(:teak, "<d>")
@@ -38,7 +38,7 @@ defmodule Islands.Grid.Tile do
 
   ## Private functions
 
-  @spec format(atom, String.t()) :: ANSI.ansidata()
+  @spec format(atom, String.t()) :: IO.chardata()
   defp format(tile_color, value) do
     # Background color same as foreground color making `value` invisible...
     ANSI.format([tile_color, :"#{tile_color}_background", value], _emit? = true)
