@@ -11,7 +11,6 @@ defmodule Islands.Grid do
   import Enum, only: [reduce: 3]
 
   alias __MODULE__.Tile
-  alias IO.ANSI.Plus, as: ANSI
   alias Islands.{Board, Coord, Guesses, Island}
 
   @col_range 1..10
@@ -19,8 +18,8 @@ defmodule Islands.Grid do
 
   @typedoc "A grid (map of maps) allowing the `grid[row][col]` syntax"
   @type t :: %{Coord.row() => %{Coord.col() => atom}}
-  @typedoc "Creates a tile from a cell value"
-  @type tile_fun :: (atom -> ANSI.ansidata())
+  @typedoc "Function creating a tile from a cell value"
+  @type tile_fun :: (atom -> IO.chardata())
 
   @doc """
   Creates an "empty" grid.
