@@ -10,7 +10,6 @@ defmodule Islands.Grid do
 
   import Enum, only: [reduce: 3]
 
-  alias __MODULE__.Tile
   alias Islands.{Board, Coord, Guesses, Island}
 
   @col_range 1..10
@@ -70,7 +69,7 @@ defmodule Islands.Grid do
   Converts a board or guesses struct into a list of maps.
   """
   @spec to_maps(Board.t() | Guesses.t(), tile_fun) :: [map]
-  def to_maps(board_or_guesses, tile_fun \\ &Tile.new/1)
+  def to_maps(board_or_guesses, tile_fun \\ &Islands.Grid.Tile.new/1)
 
   def to_maps(%Board{} = board, tile_fun) when is_function(tile_fun, 1),
     do: new(board) |> do_to_maps(tile_fun)
