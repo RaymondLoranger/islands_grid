@@ -66,7 +66,10 @@ defmodule Islands.Grid do
     do: new() |> update(hits, :hit) |> update(misses, :miss)
 
   @doc """
-  Converts a board or guesses struct into a list of maps.
+  Converts a board or guesses struct into a grid and then into a list of maps.
+  Function `tile_fun` converts each grid cell value into a colored tile (with
+  embedded ANSI escapes). The default for `tile_fun` is function
+  `Islands.Grid.Tile.new/1`.
   """
   @spec to_maps(Board.t() | Guesses.t(), tile_fun) :: [map]
   def to_maps(board_or_guesses, tile_fun \\ &Islands.Grid.Tile.new/1)
