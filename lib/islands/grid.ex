@@ -5,7 +5,7 @@ defmodule Islands.Grid do
   @moduledoc """
   A grid (map of maps) and functions for the _Game of Islands_.
 
-  ##### Inspired by the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
+  ##### Inspired by the book [Functional Web Development](https://pragprog.com/titles/lhelph/functional-web-development-with-elixir-otp-and-phoenix/) by Lance Halvorsen.
   """
 
   import Enum, only: [reduce: 3]
