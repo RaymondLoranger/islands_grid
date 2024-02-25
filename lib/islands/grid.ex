@@ -38,6 +38,30 @@ defmodule Islands.Grid do
       iex>   end
       iex> end
       [[nil], [nil], [nil], [nil], [nil], [nil], [nil], [nil], [nil], [nil]]
+
+      iex> Islands.Grid.new()
+      %{
+        1 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        2 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        3 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        4 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        5 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        6 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        7 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        8 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        9 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
+        10 => %{1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+                6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil}
+      }
   """
   @spec new :: t
   def new do

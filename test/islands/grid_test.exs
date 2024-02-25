@@ -45,7 +45,7 @@ defmodule Islands.GridTest do
                10 => nil
              }
 
-      assert row_2 == row_10
+      assert row_1 == row_2 and row_2 == row_10
       assert Map.values(row_10) |> Enum.all?(&is_nil/1)
     end
   end
