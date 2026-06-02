@@ -6,12 +6,12 @@ defmodule Islands.GridTest do
   doctest Grid
 
   setup_all do
-    {:ok, atoll_orig} = Coord.new(1, 1)
+    {:ok, atoll_origin} = Coord.new(1, 1)
     {:ok, atoll_hit} = Coord.new(1, 2)
     {:ok, board_miss} = Coord.new(1, 3)
     {:ok, hit} = Coord.new(1, 4)
     {:ok, miss} = Coord.new(1, 5)
-    {:ok, atoll} = Island.new(:atoll, atoll_orig)
+    {:ok, atoll} = Island.new(:atoll, atoll_origin)
 
     {:hit, :none, :no_win, board} =
       Board.new()
@@ -52,7 +52,7 @@ defmodule Islands.GridTest do
 
   describe "Grid.new/1" do
     test "returns a board grid", %{board: board} do
-      %{1 => row_1, 2 => row_2, 10 => row_10} = Grid.new(board)
+      %{1 => row_1, 2 => row_2, 3 => row_3, 10 => row_10} = Grid.new(board)
 
       assert row_1 == %{
                1 => :atoll,
@@ -69,6 +69,19 @@ defmodule Islands.GridTest do
 
       assert row_2 == %{
                1 => nil,
+               2 => :atoll,
+               3 => nil,
+               4 => nil,
+               5 => nil,
+               6 => nil,
+               7 => nil,
+               8 => nil,
+               9 => nil,
+               10 => nil
+             }
+
+      assert row_3 == %{
+               1 => :atoll,
                2 => :atoll,
                3 => nil,
                4 => nil,
@@ -106,7 +119,7 @@ defmodule Islands.GridTest do
 
   describe "Grid.to_maps/2" do
     test "converts a board struct into a list of maps", %{board: board} do
-      [row_1, row_2 | _] = Grid.to_maps(board, & &1)
+      [row_1, row_2, row_3 | _] = Grid.to_maps(board, & &1)
 
       assert row_1 == %{
                "row" => 1,
@@ -125,6 +138,20 @@ defmodule Islands.GridTest do
       assert row_2 == %{
                "row" => 2,
                1 => nil,
+               2 => :atoll,
+               3 => nil,
+               4 => nil,
+               5 => nil,
+               6 => nil,
+               7 => nil,
+               8 => nil,
+               9 => nil,
+               10 => nil
+             }
+
+      assert row_3 == %{
+               "row" => 3,
+               1 => :atoll,
                2 => :atoll,
                3 => nil,
                4 => nil,

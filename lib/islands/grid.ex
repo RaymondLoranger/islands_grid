@@ -71,6 +71,21 @@ defmodule Islands.Grid do
 
   @doc """
   Converts a board or guesses struct into a grid.
+
+  ## Examples
+
+      iex> alias Islands.{Board, Coord, Grid, Island}
+      iex> {:ok, atoll_origin} = Coord.new(1, 1)
+      iex> {:ok, atoll_hit} = Coord.new(1, 2)
+      iex> {:ok, atoll} = Island.new(:atoll, atoll_origin)
+      iex> board = Board.new() |> Board.position_island(atoll)
+      iex> {:hit, :none, :no_win, board} = Board.guess(board, atoll_hit)
+      iex> grid = Grid.new(board)
+      iex> row_1 = {grid[1][1], grid[1][2], grid[1][3]}
+      iex> row_2 = {grid[2][1], grid[2][2], grid[2][3]}
+      iex> row_3 = {grid[3][1], grid[3][2], grid[3][3]}
+      iex> {row_1, row_2, row_3}
+      {{:atoll, :atoll_hit, nil}, {nil, :atoll, nil}, {:atoll, :atoll, nil}}
   """
   @spec new(Board.t() | Guesses.t()) :: t
   def new(board_or_guesses)
@@ -91,9 +106,21 @@ defmodule Islands.Grid do
 
   @doc """
   Converts a board or guesses struct into a grid and then into a list of maps.
-  Function `tile_fun` converts each grid cell value into a colored tile (with
-  embedded ANSI escapes). The default for `tile_fun` is function
+  Function `tile_fun` should convert each grid cell value into a colored tile
+  (with embedded ANSI escape sequences). The default for `tile_fun` is function
   `Islands.Grid.Tile.new/1`.
+
+  ## Examples
+
+      iex> alias Islands.{Board, Coord, Grid, Island}
+      iex> {:ok, atoll_origin} = Coord.new(1, 1)
+      iex> {:ok, atoll_hit} = Coord.new(1, 2)
+      iex> {:ok, atoll} = Island.new(:atoll, atoll_origin)
+      iex> board = Board.new() |> Board.position_island(atoll)
+      iex> {:hit, :none, :no_win, board} = Board.guess(board, atoll_hit)
+      iex> [row_1 | _other_9_maps] = Grid.to_maps(board, & &1)
+      iex> Map.take(row_1, ["row", 1, 2, 3, 10])
+      %{"row" => 1, 1 => :atoll, 2 => :atoll_hit, 3 => nil, 10 => nil}
   """
   @spec to_maps(Board.t() | Guesses.t(), tile_fun) :: [map]
   def to_maps(board_or_guesses, tile_fun \\ &Islands.Grid.Tile.new/1)
