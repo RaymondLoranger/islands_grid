@@ -12,11 +12,11 @@ defmodule Islands.Grid.Tile do
 
       iex> alias Islands.Grid.Tile
       iex> Tile.new(:atoll) # => A sandy brown tile
-      [[[[[] | "\e[38;5;215m"] | "\e[48;5;215m"], "<a>"] | "\e[0m"]
+      [[[[[] | "\\e[38;5;215m"] | "\\e[48;5;215m"], "<a>"] | "\\e[0m"]
 
       iex> alias Islands.Grid.Tile
       iex> Tile.new(:atoll_hit) # => An islamic green tile
-      [[[[[] | "\e[38;5;34m"] | "\e[48;5;34m"], ">a<"] | "\e[0m"]
+      [[[[[] | "\\e[38;5;34m"] | "\\e[48;5;34m"], ">a<"] | "\\e[0m"]
   """
   @spec new(atom) :: IO.chardata()
   def new(cell_value)
