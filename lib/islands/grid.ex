@@ -106,6 +106,7 @@ defmodule Islands.Grid do
 
   @doc """
   Converts a board or guesses struct into a grid and then into a list of maps.
+
   Function `tile_fun` should convert each grid cell value into a colored tile
   (with embedded ANSI escape sequences). The default for `tile_fun` is function
   `Islands.Grid.Tile.new/1`.
