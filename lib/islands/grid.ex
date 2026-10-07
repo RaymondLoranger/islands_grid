@@ -17,7 +17,7 @@ defmodule Islands.Grid do
 
   @typedoc "A grid (map of maps) allowing the `grid[row][col]` syntax"
   @type t :: %{Coord.row() => %{Coord.col() => atom}}
-  @typedoc "Function creating a tile from a cell value"
+  @typedoc "Function creating a tile from a grid cell value"
   @type tile_fun :: (atom -> IO.chardata())
 
   @doc """
@@ -59,7 +59,7 @@ defmodule Islands.Grid do
                 6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
         9 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
                 6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil},
-        10 => %{1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
+       10 => %{ 1 => nil, 2 => nil, 3 => nil, 4 => nil,  5 => nil,
                 6 => nil, 7 => nil, 8 => nil, 9 => nil, 10 => nil}
       }
   """
@@ -122,6 +122,22 @@ defmodule Islands.Grid do
       iex> [row_1 | _other_9_maps] = Grid.to_maps(board, & &1)
       iex> Map.take(row_1, ["row", 1, 2, 3, 10])
       %{"row" => 1, 1 => :atoll, 2 => :atoll_hit, 3 => nil, 10 => nil}
+
+      iex> alias Islands.{Board, Coord, Grid, Island}
+      iex> {:ok, atoll_origin} = Coord.new(1, 1)
+      iex> {:ok, atoll_hit} = Coord.new(1, 2)
+      iex> {:ok, atoll} = Island.new(:atoll, atoll_origin)
+      iex> board = Board.new() |> Board.position_island(atoll)
+      iex> {:hit, :none, :no_win, board} = Board.guess(board, atoll_hit)
+      iex> [row_1 | _other_9_maps] = Grid.to_maps(board)
+      iex> Map.take(row_1, ["row", 1, 2, 3, 10])
+      %{
+        "row" => 1,
+        1 => [[[[[] | "\e[38;5;215m"] | "\e[48;5;215m"], "<a>"] | "\e[0m"],
+        2 => [[[[[] | "\e[38;5;34m"]  | "\e[48;5;34m"], ">a<"]  | "\e[0m"],
+        3 => [[[[[] | "\e[38;5;39m"]  | "\e[48;5;39m"], "<o>"]  | "\e[0m"],
+       10 => [[[[[] | "\e[38;5;39m"]  | "\e[48;5;39m"], "<o>"]  | "\e[0m"]
+      }
   """
   @spec to_maps(Board.t() | Guesses.t(), tile_fun) :: [map]
   def to_maps(board_or_guesses, tile_fun \\ &Islands.Grid.Tile.new/1)

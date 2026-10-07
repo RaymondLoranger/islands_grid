@@ -34,6 +34,7 @@ defmodule Islands.Grid.Tile do
   def new(:miss), do: format(:blue_ribbon, "<m>")
   # def new(:board_miss), do: format(:dodger_blue, "<m>")
   def new(:board_miss), do: format(:blue_ribbon, "<m>")
+  # Tile of empty grid cell...
   def new(nil), do: format(:deep_sky_blue, "<o>")
 
   ## Private functions
