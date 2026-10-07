@@ -104,7 +104,7 @@ defmodule Islands.Grid do
   def new(%Guesses{hits: hits, misses: misses}),
     do: new() |> update(hits, :hit) |> update(misses, :miss)
 
-  @doc """
+  @doc ~S"""
   Converts a board or guesses struct into a grid and then into a list of maps.
 
   Function `tile_fun` should convert each grid cell value into a colored tile
